@@ -1,0 +1,355 @@
+    <style>
+        /* Import pixelated fonts similar to PS1 era */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        /* PS1 Color Palette */
+        :root {
+            --ps1-blue: #0066CC;
+            --ps1-dark-blue: #003366;
+            --ps1-light-blue: #66CCFF;
+            --ps1-purple: #663399;
+            --ps1-pink: #FF6699;
+            --ps1-yellow: #FFCC00;
+            --ps1-green: #00CC66;
+            --ps1-red: #FF3333;
+            --ps1-black: #000000;
+            --ps1-white: #FFFFFF;
+            --ps1-grey: #666666;
+            --ps1-light-grey: #CCCCCC;
+            --scan-line: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Base styling for CodePen profile */
+        body {
+            background: linear-gradient(135deg, var(--ps1-dark-blue) 0%, var(--ps1-purple) 50%, var(--ps1-black) 100%);
+            font-family: 'Orbitron', monospace;
+            color: var(--ps1-white);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Scanline effect overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                var(--scan-line) 2px,
+                var(--scan-line) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+            animation: scanlines 0.1s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        /* Profile header styling */
+        .profile-header,
+        .profile-details {
+            background: linear-gradient(45deg, var(--ps1-blue), var(--ps1-purple));
+            border: 2px solid var(--ps1-light-blue);
+            border-radius: 0;
+            box-shadow: 
+                0 0 20px var(--ps1-blue),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        /* Glitch effect for headers */
+        .profile-header h1,
+        .profile-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                2px 2px 0px var(--ps1-pink),
+                -2px -2px 0px var(--ps1-yellow),
+                0 0 10px var(--ps1-light-blue);
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); }
+            20% { transform: translate(2px, -2px); }
+            30% { transform: translate(-2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            50% { transform: translate(-2px, 2px); }
+            60% { transform: translate(2px, -2px); }
+            70% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+            90% { transform: translate(-2px, 2px); }
+        }
+
+        /* Button styling */
+        .btn, 
+        button,
+        .button {
+            background: linear-gradient(45deg, var(--ps1-blue), var(--ps1-light-blue));
+            border: 2px solid var(--ps1-yellow);
+            color: var(--ps1-white);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before,
+        button::before,
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--ps1-yellow), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before,
+        button:hover::before,
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover,
+        button:hover,
+        .button:hover {
+            box-shadow: 
+                0 0 20px var(--ps1-yellow),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* CodePen project cards */
+        .project-card,
+        .pen-item {
+            background: linear-gradient(135deg, var(--ps1-black), var(--ps1-dark-blue));
+            border: 2px solid var(--ps1-green);
+            border-radius: 0;
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                0 0 15px var(--ps1-green);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before,
+        .pen-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, var(--ps1-green) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before,
+        .pen-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-card:hover,
+        .pen-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.4),
+                0 0 25px var(--ps1-green);
+        }
+
+        /* Text styling */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px var(--ps1-dark-blue);
+        }
+
+        p, span, div {
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+        }
+
+        /* Links */
+        a {
+            color: var(--ps1-yellow);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ps1-yellow);
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        a:hover {
+            color: var(--ps1-white);
+            text-shadow: 0 0 10px var(--ps1-yellow);
+        }
+
+        /* Stats/Numbers styling */
+        .stats-number,
+        .count {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            color: var(--ps1-yellow);
+            text-shadow: 0 0 10px var(--ps1-yellow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav,
+        .nav {
+            background: linear-gradient(90deg, var(--ps1-purple), var(--ps1-dark-blue));
+            border-bottom: 2px solid var(--ps1-light-blue);
+        }
+
+        nav a,
+        .nav a {
+            color: var(--ps1-white);
+            padding: 10px 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover,
+        .nav a:hover {
+            background: var(--ps1-light-blue);
+            color: var(--ps1-black);
+            border-bottom-color: var(--ps1-yellow);
+        }
+
+        /* Profile avatar/image */
+        .profile-avatar,
+        .avatar {
+            border: 3px solid var(--ps1-yellow);
+            border-radius: 0;
+            box-shadow: 
+                0 0 20px var(--ps1-yellow),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            filter: contrast(1.2) saturate(1.1);
+        }
+
+        /* Input fields */
+        input,
+        textarea,
+        select {
+            background: var(--ps1-black);
+            border: 2px solid var(--ps1-blue);
+            color: var(--ps1-white);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 10px;
+            border-radius: 0;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--ps1-yellow);
+            box-shadow: 0 0 10px var(--ps1-yellow);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--ps1-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--ps1-blue), var(--ps1-purple));
+            border: 1px solid var(--ps1-yellow);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--ps1-purple), var(--ps1-pink));
+        }
+
+        /* Retro grid background for sections */
+        .section-bg {
+            background-image: 
+                linear-gradient(rgba(0, 102, 204, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 204, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Loading animation */
+        .loading {
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--ps1-yellow);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-header h1,
+            .profile-name {
+                font-size: 1.5rem;
+            }
+            
+            .btn,
+            button,
+            .button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
