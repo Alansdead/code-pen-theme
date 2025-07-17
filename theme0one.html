@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS1 Vintage Game Theme - Demo</title>
+    <!-- Link to your hosted CSS file -->
+    <link rel="stylesheet" href="ps1-theme.css">
+</head>
+<body>
+    <div class="demo-container">
+        <header class="profile-header">
+            <h1 class="profile-name">Player One</h1>
+            <p>Level 99 Code Wizard</p>
+        </header>
+
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <main class="section-bg">
+            <div class="project-card">
+                <h3>Epic Game Project</h3>
+                <p>A retro-inspired web game built with HTML5 Canvas</p>
+                <div class="stats-number">1337</div>
+                <button class="btn">View Code</button>
+            </div>
+
+            <div class="project-card">
+                <h3>Pixel Art Generator</h3>
+                <p>Create 8-bit style graphics with this web tool</p>
+                <div class="stats-number">420</div>
+                <button class="btn">Play Demo</button>
+            </div>
+
+            <div class="project-card">
+                <h3>Chiptune Player</h3>
+                <p>Web-based music player for 8-bit soundtracks</p>
+                <div class="stats-number">256</div>
+                <button class="btn">Listen Now</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 - Coded with <span style="color: var(--ps1-pink);">♥</span> in the 90s spirit</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add some interactive PS1-style effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add random glitch effect to headers
+            const headers = document.querySelectorAll('h1, h2, h3');
+            headers.forEach(header => {
+                setInterval(() => {
+                    if (Math.random() > 0.95) {
+                        header.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                        setTimeout(() => {
+                            header.style.transform = 'translate(0, 0)';
+                        }, 100);
+                    }
+                }, 100);
+            });
+
+            // Add click sound effect simulation
+            const buttons = document.querySelectorAll('.btn, button, .button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'translateY(2px)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-2px)';
+                    }, 100);
+                });
+            });
+
+            // Add typing effect to stats numbers
+            const statsNumbers = document.querySelectorAll('.stats-number');
+            statsNumbers.forEach(stat => {
+                const finalNumber = stat.textContent;
+                stat.textContent = '0';
+                
+                let current = 0;
+                const target = parseInt(finalNumber);
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = finalNumber;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 50);
+            });
+        });
+    </script>
+</body>
+</html>
